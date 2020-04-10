@@ -1,0 +1,90 @@
+#container {
+    display: flex;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 20px;
+    width: 600px;
+}
+
+#container:hover .button{
+    color: darkgray;
+}
+
+#avatar {
+    justify-content: flex-start;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+
+}
+
+#comment {
+    justify-content: flex-start;
+}
+
+#name {
+ font-weight: bold;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 14px;
+ flex-grow: 2;
+}
+
+#posted {
+    color: darkgrey;
+    text-transform: capitalize;
+    font-size: 9.5px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 5px;
+}
+
+#message {
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px;
+}
+
+#message p {
+    padding: 5px 0px 0px 0px;
+    margin: 0px;
+}
+
+.button {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: none;
+    color: lightgray;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 9.5px;
+    padding: 0px;
+    margin-top: 0px;
+    outline: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+#replies {
+    padding-left: 5px;
+}
+
+#up-votes {
+    padding-left: 5px;
+}
+
+#down-votes {
+    padding-left: 5px;
+}
+
+#reply-num {
+    color: darkgrey;
+}
+
+
+
+
