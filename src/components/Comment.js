@@ -88,7 +88,6 @@ class Comment extends React.Component {
 
   
   render(){
-    console.log(this.state.downVotes);
         return (
             <div>
         <p> &nbsp;</p>
@@ -106,9 +105,9 @@ class Comment extends React.Component {
         </tr>
         <tr>
             <td><button id="reply" className="button" onClick={this.replyClick}>REPLY</button>
-            <button id="replies" className="button"> <span id="reply-num" onClick={this.repliesClick}></span><strong>{comment.replies}</strong> REPLIES</button>
-            <button id="up-votes" className="button" onClick={this.upVotesClick}><FontAwesomeIcon icon={faAngleUp}/> {this.state.upVotes !== 0? this.state.upVotes : ""}</button>
-            <button id="down-votes" className="button" onClick={this.downVotesClick}><FontAwesomeIcon icon={faAngleDown}/> {this.state.downVotes !== 0? this.state.downVotes : ""}</button></td>
+            <button id="replies" className="button" onClick={this.repliesClick}> <span id="reply-num"></span><strong>{comment.replies}</strong> REPLIES</button>
+            <button id="up-votes" className="button" onClick={this.upVotesClick} data-testid="upVote"><FontAwesomeIcon icon={faAngleUp}/> {this.state.upVotes !== 0? this.state.upVotes : ""}</button>
+            <button id="down-votes" className="button" onClick={this.downVotesClick} data-testid="downVote"><FontAwesomeIcon icon={faAngleDown}/> {this.state.downVotes !== 0? this.state.downVotes : ""}</button></td>
         </tr>
         </tbody>
     </table>
