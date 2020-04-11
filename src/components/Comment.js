@@ -3,31 +3,43 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Comment.css';
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+
 import Avatar from './img.jpg';
 
-class Comment extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { hasError: false };
-    }
+const authorStyle = {
+  'fontWeight': 600,
+  'fontSize': '10px',
+  'marginLeft': '8px',
+}
 
-    comment = {
-        name: "Brad",
-        author: true,
-        message: "So what the German automaker is likely to focus on today is the bigger picture. This will be the first time we see the Taycan free from any prototype bodywork.",
-        minutesAgo: 2,
-        replies: 21,
-        upVotes: 123
-      };
+const comment = {
+  name: "Brad",
+  author: true,
+  message: "So what the German automaker is likely to focus on today is the bigger picture. This will be the first time we see the Taycan free from any prototype bodywork.",
+  minutesAgo: 2,
+  replies: 21,
+  upVotes: 123,
+  downVotes: 0
+};
+
+const author = comment.author === true ? "AUTHOR" : "";
       
-      author = this.comment.author === true ? `<span class="badge badge-pill badge-dark" style="font-weight:500; font-size:10px; margin-left:2px;">AUTHOR</span>` : "";
-      
-      upVotes = this.comment.upVotes? this.comment.upVotes : "";
-      
-      downVotes = this.comment.downVotes? this.comment.downVotes : "";
-      
+// const upVotes = comment.upVotes;
+
+// const downVotes = comment.downVotes;
+
+class Comment extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      upVotes: comment.upVotes ? comment.upVotes : 0,
+      downVotes: comment.downVotes ? comment.downVotes: 0 
+    };
+  }     
       // Function to show replies on click
-      // eslint-disable-next-line no-undef
       replyClick = () => {
         alert("This is where you would reply");
       }
@@ -41,28 +53,42 @@ class Comment extends React.Component {
       
       // Functions to add or takeaway a new up or down vote
       upVotesClick = () => {
-            // if (this.upVotes === this.comment.upVotesComment) {
-            //     this.upVotes = this.upVotes + 1;
-            //     if (document.getElementById("down-votes").innerHTML === this.downVotes + 1) {
-            //         document.getElementById("down-votes").innerHTML = this.downVotes
-            //     }
-            // } else {
-            //     document.getElementById("up-votes").innerHTML = this.upVotes;
-            // }
+            if (this.state.upVotes === comment.upVotes) {
+              this.setState({
+                upVotes: this.state.upVotes + 1
+              });
+              if (this.state.downVotes !== comment.downVotes) {
+                this.setState({
+                  downVotes: this.downVotes
+                });
+                }
+              } else {
+                this.setState({
+                  upVotes: comment.upVotes? comment.upVotes : ""
+                })
+              }
       };
       
       downVotesClick = () => {
-        // if (document.getElementById("down-votes").innerHTML === `<i class="fa fa-angle-down"></i> ${downVotes}`){
-        //     document.getElementById("down-votes").innerHTML = `<i class="fa fa-angle-down"></i> ${downVotes + 1}`;
-        //     if (document.getElementById("up-votes").innerHTML === `<i class="fa fa-angle-up"></i> ${upVotes + 1}`){
-        //         document.getElementById("up-votes").innerHTML = `<i class="fa fa-angle-up"></i> ${upVotes}`
-        //     }
-        // } else {
-        //     document.getElementById("down-votes").innerHTML = `<i class="fa fa-angle-down"></i> ${downVotes}`
-        // }
-      };
+        if (this.state.downVotes === comment.downVotes) {
+          this.setState({
+            downVotes: this.state.downVotes + 1
+          });
+          if (this.state.upVotes !== comment.upVotes) {
+            this.setState({
+              upVotes: comment.upVotes
+            });
+            }
+          } else {
+            this.setState({
+              downVotes: comment.downVotes
+            })
+          }
+  };
+
   
-    render(){
+  render(){
+    console.log(this.state.downVotes);
         return (
             <div>
         <p> &nbsp;</p>
@@ -71,18 +97,18 @@ class Comment extends React.Component {
     <table id="comment">
       <tbody>
         <tr>
-            <td><span id="name">{this.comment.name}</span>
-            <span className="badge badge-pill badge-dark">AUTHOR</span>
-            <span id="posted"><strong>&#183;</strong> {this.comment.minutesAgo} MINUTES AGO`</span></td>
+            <td><span id="name">{comment.name}</span>
+            <span className="badge badge-pill badge-dark" style={authorStyle}>{author}</span>
+            <span id="posted"><strong>&#183;</strong> {comment.minutesAgo} MINUTES AGO`</span></td>
         </tr>
         <tr>
-            <td id="message" colSpan="6"><p>{this.comment.message}</p></td>
+            <td id="message" colSpan="6"><p>{comment.message}</p></td>
         </tr>
         <tr>
             <td><button id="reply" className="button" onClick={this.replyClick}>REPLY</button>
-            <button id="replies" className="button"> <span id="reply-num" onClick={this.repliesClick}></span>{this.comment.replies} REPLIES</button>
-            <button id="up-votes" className="button" onClick={this.upVotesClick}>`<i class="fa fa-angle-up"></i> {this.upVotes}</button>
-            <button id="down-votes" className="button" onClick={this.downVotesClick}>`<i class="fa fa-angle-down"></i> {this.downVotes}</button></td>
+            <button id="replies" className="button"> <span id="reply-num" onClick={this.repliesClick}></span><strong>{comment.replies}</strong> REPLIES</button>
+            <button id="up-votes" className="button" onClick={this.upVotesClick}><FontAwesomeIcon icon={faAngleUp}/> {this.state.upVotes !== 0? this.state.upVotes : ""}</button>
+            <button id="down-votes" className="button" onClick={this.downVotesClick}><FontAwesomeIcon icon={faAngleDown}/> {this.state.downVotes !== 0? this.state.downVotes : ""}</button></td>
         </tr>
         </tbody>
     </table>
